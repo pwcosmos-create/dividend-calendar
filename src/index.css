@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --color-toss-blue: #3182f6;
+  --color-toss-blue-dark: #1b64da;
+  --color-toss-gray-50: #f9fafb;
+  --color-toss-gray-100: #f2f4f6;
+  --color-toss-gray-200: #e5e8eb;
+  --color-toss-gray-400: #8b95a1;
+  --color-toss-gray-600: #4e5968;
+  --color-toss-gray-900: #191f28;
+  --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: #f2f4f6;
+  color: #191f28;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  background: #f2f4f6;
+}
+
+@keyframes slide-up {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out both;
+}
