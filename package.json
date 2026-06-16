@@ -13,7 +13,8 @@
     "sync:kr": "node scripts/sync-kr-dividends.mjs",
     "sync:prices": "node scripts/sync-kr-prices.mjs",
     "sync:us": "node scripts/sync-us-dividends.mjs",
-    "sync:all": "npm run sync:kr && npm run sync:prices && npm run sync:us"
+    "sync:us-prices": "node scripts/sync-us-prices.mjs",
+    "sync:all": "npm run sync:kr && npm run sync:prices && npm run sync:us && npm run sync:us-prices"
   },
   "dependencies": {
     "react": "^19.2.6",

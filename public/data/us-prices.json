@@ -1,0 +1,105 @@
+{
+  "syncedAt": "2026-06-16T09:52:33.487Z",
+  "source": "financialmodelingprep.com/stable/profile",
+  "prices": [
+    {
+      "ticker": "SCHD",
+      "name": "Schwab U.S. Dividend Equity ETF",
+      "closePrice": 32.63,
+      "changeRate": -0.57892,
+      "market": "US",
+      "currency": "USD",
+      "basDt": "20260616"
+    },
+    {
+      "ticker": "JEPI",
+      "name": "JPMorgan Equity Premium Income ETF",
+      "closePrice": 56.37,
+      "changeRate": 0.58886,
+      "market": "US",
+      "currency": "USD",
+      "basDt": "20260616"
+    },
+    {
+      "ticker": "O",
+      "name": "Realty Income Corporation",
+      "closePrice": 62.14,
+      "changeRate": -0.92474,
+      "market": "US",
+      "currency": "USD",
+      "basDt": "20260616"
+    },
+    {
+      "ticker": "VYM",
+      "name": "Vanguard High Dividend Yield ETF",
+      "closePrice": 160.46,
+      "changeRate": 0.08108277,
+      "market": "US",
+      "currency": "USD",
+      "basDt": "20260616"
+    },
+    {
+      "ticker": "MAIN",
+      "name": "Main Street Capital Corporation",
+      "closePrice": 51.29,
+      "changeRate": -1.40331,
+      "market": "US",
+      "currency": "USD",
+      "basDt": "20260616"
+    },
+    {
+      "ticker": "QYLD",
+      "name": "Global X - Nasdaq 100 Covered Call ETF",
+      "closePrice": 18.21,
+      "changeRate": 0.66335,
+      "market": "US",
+      "currency": "USD",
+      "basDt": "20260616"
+    },
+    {
+      "ticker": "KO",
+      "name": "The Coca-Cola Company",
+      "closePrice": 80.91,
+      "changeRate": -2.06972,
+      "market": "US",
+      "currency": "USD",
+      "basDt": "20260616"
+    },
+    {
+      "ticker": "JEPQ",
+      "name": "JPMorgan Nasdaq Equity Premium Income ETF",
+      "closePrice": 61.18,
+      "changeRate": 2.20515,
+      "market": "US",
+      "currency": "USD",
+      "basDt": "20260616"
+    },
+    {
+      "ticker": "SPYD",
+      "name": "State Street SPDR Portfolio S&P 500 High Dividend ETF",
+      "closePrice": 48.65,
+      "changeRate": -0.95684,
+      "market": "US",
+      "currency": "USD",
+      "basDt": "20260616"
+    },
+    {
+      "ticker": "DGRO",
+      "name": "iShares Core Dividend Growth ETF",
+      "closePrice": 75.63,
+      "changeRate": -0.36886,
+      "market": "US",
+      "currency": "USD",
+      "basDt": "20260616"
+    },
+    {
+      "ticker": "ALL",
+      "name": "The Allstate Corporation",
+      "closePrice": 221.81,
+      "changeRate": 0.08121644,
+      "market": "US",
+      "currency": "USD",
+      "basDt": "20260616"
+    }
+  ]
+}

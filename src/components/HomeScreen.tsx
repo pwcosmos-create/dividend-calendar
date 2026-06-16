@@ -1,6 +1,8 @@
 import { useMemo } from 'react'
 import type { DividendStock, Holding } from '../types'
-import type { KrPrice } from '../hooks/useKrPrices'
+import type { StockPrice } from '../types/price'
+import { getStockPrice } from '../hooks/useStockPrices'
+import PriceLine from './PriceLine'
 import {
   calculateMonthlyDividends,
   formatKRW,
@@ -8,6 +10,7 @@ import {
   getCurrentMonthDividend,
   getNextPayment,
   getStockById,
+  toKRW,
 } from '../utils/dividendCalculator'
 
 interface HomeScreenProps {
@@ -17,8 +20,10 @@ interface HomeScreenProps {
   syncedAt?: string | null
   hasLiveKrData?: boolean
   hasLiveUsData?: boolean
-  krPrices?: Map<string, KrPrice>
+  krPrices?: Map<string, StockPrice>
+  stockPrices?: Map<string, StockPrice>
   priceBasDt?: string | null
+  hasUsPrices?: boolean
   onAddClick: () => void
   onUpdateShares: (stockId: string, shares: number) => void
   onRemove: (stockId: string) => void
@@ -32,16 +37,30 @@ export default function HomeScreen({
   hasLiveKrData,
   hasLiveUsData,
   krPrices,
+  stockPrices,
   priceBasDt,
+  hasUsPrices,
   onAddClick,
   onUpdateShares,
   onRemove,
 }: HomeScreenProps) {
   const monthly = useMemo(() => calculateMonthlyDividends(holdings, stocks), [holdings, stocks])
+  const prices = stockPrices ?? krPrices ?? new Map<string, StockPrice>()
   const annualTotal = getAnnualTotal(monthly)
   const thisMonth = getCurrentMonthDividend(monthly)
   const nextPayment = getNextPayment(monthly)
   const currentMonth = new Date().getMonth() + 1
+
+  const totalMarketValueKRW = useMemo(() => {
+    if (holdings.length === 0) return 0
+    return holdings.reduce((sum, h) => {
+      const stock = getStockById(h.stockId, stocks)
+      if (!stock) return sum
+      const price = getStockPrice(prices, stock.ticker)
+      if (!price) return sum
+      return sum + toKRW(price.closePrice * h.shares, price.currency)
+    }, 0)
+  }, [holdings, prices, stocks])
 
   return (
     <div className="pb-24 animate-fade-in">
@@ -59,9 +78,10 @@ export default function HomeScreen({
             🇺🇸 미국 배당 · FMP 실데이터 연동
           </p>
         )}
-        {priceBasDt && krPrices && krPrices.size > 0 && (
+        {priceBasDt && prices && prices.size > 0 && (
           <p className="text-[11px] text-toss-gray-400 mt-1">
-            📈 시세 · {priceBasDt.replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3')} 종가 기준
+            📈 국내 시세 · {priceBasDt.replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3')} 종가
+            {hasUsPrices && ' · 🇺🇸 미국 시세 연동'}
           </p>
         )}
         {loading && (
@@ -76,6 +96,12 @@ export default function HomeScreen({
           {holdings.length > 0 ? formatKRW(annualTotal) : '0원'}
         </p>
         <div className="flex gap-4 mt-5 pt-5 border-t border-white/20">
+          {totalMarketValueKRW > 0 && (
+            <div className="flex-1">
+              <p className="text-white/70 text-xs">총 평가금액</p>
+              <p className="text-lg font-bold mt-0.5">{formatKRW(totalMarketValueKRW)}</p>
+            </div>
+          )}
           <div className="flex-1">
             <p className="text-white/70 text-xs">이번 달 ({currentMonth}월)</p>
             <p className="text-lg font-bold mt-0.5">{formatKRW(thisMonth)}</p>
@@ -104,18 +130,23 @@ export default function HomeScreen({
         </div>
 
         {holdings.length === 0 ? (
-          <div className="bg-white rounded-2xl p-10 text-center">
-            <div className="text-5xl mb-4">💰</div>
-            <p className="text-toss-gray-900 font-semibold">아직 등록된 종목이 없어요</p>
-            <p className="text-toss-gray-400 text-sm mt-2">
-              관심 배당 종목을 추가하고<br />매달 들어올 수당을 확인해 보세요
-            </p>
-            <button
-              onClick={onAddClick}
-              className="mt-6 w-full bg-toss-gray-100 text-toss-blue font-semibold py-3.5 rounded-xl active:bg-toss-gray-200 transition-colors"
-            >
-              첫 종목 추가하기
-            </button>
+          <div className="space-y-4">
+            <div className="bg-white rounded-2xl p-10 text-center">
+              <div className="text-5xl mb-4">💰</div>
+              <p className="text-toss-gray-900 font-semibold">아직 등록된 종목이 없어요</p>
+              <p className="text-toss-gray-400 text-sm mt-2">
+                관심 배당 종목을 추가하고<br />매달 들어올 수당을 확인해 보세요
+              </p>
+              <button
+                onClick={onAddClick}
+                className="mt-6 w-full bg-toss-gray-100 text-toss-blue font-semibold py-3.5 rounded-xl active:bg-toss-gray-200 transition-colors"
+              >
+                첫 종목 추가하기
+              </button>
+            </div>
+            {prices.size > 0 && (
+              <PopularPrices prices={prices} onAddClick={onAddClick} stocks={stocks} />
+            )}
           </div>
         ) : (
           <div className="space-y-3">
@@ -125,7 +156,7 @@ export default function HomeScreen({
               const stockAnnual = calculateMonthlyDividends([h], stocks)
               const stockTotal = getAnnualTotal(stockAnnual)
 
-              const price = stock.market === 'KR' ? krPrices?.get(stock.ticker) : undefined
+              const price = getStockPrice(prices, stock.ticker)
 
               return (
                 <HoldingCard
@@ -166,11 +197,13 @@ function HoldingCard({
   category: string
   shares: number
   annualDividend: number
-  price?: KrPrice
+  price?: StockPrice
   onUpdateShares: (shares: number) => void
   onRemove: () => void
 }) {
-  const marketValue = price ? price.closePrice * shares : null
+  const marketValueKRW = price
+    ? toKRW(price.closePrice * shares, price.currency)
+    : null
 
   return (
     <div className="bg-white rounded-2xl p-4 shadow-sm">
@@ -184,18 +217,17 @@ function HoldingCard({
           <div>
             <p className="font-bold text-toss-gray-900">{name}</p>
             <p className="text-xs text-toss-gray-400 mt-0.5">{ticker} · {category}</p>
-            {price && (
-              <p className="text-xs mt-1">
-                <span className="font-semibold text-toss-gray-700">{formatKRW(price.closePrice)}</span>
-                <span className={`ml-1.5 ${price.changeRate >= 0 ? 'text-red-500' : 'text-toss-blue'}`}>
-                  {price.changeRate >= 0 ? '+' : ''}{price.changeRate}%
-                </span>
-              </p>
-            )}
           </div>
         </div>
         <button onClick={onRemove} className="text-toss-gray-400 text-xs px-2 py-1">삭제</button>
       </div>
+
+      {price && (
+        <div className="mt-3 flex items-center justify-between bg-toss-gray-50 rounded-xl px-4 py-3">
+          <span className="text-xs text-toss-gray-500 font-medium">현재가</span>
+          <PriceLine price={price} size="md" />
+        </div>
+      )}
 
       <div className="flex items-center justify-between mt-4 pt-3 border-t border-toss-gray-100">
         <div>
@@ -217,16 +249,61 @@ function HoldingCard({
           </div>
         </div>
         <div className="text-right">
-          {marketValue !== null && (
+          {marketValueKRW !== null && (
             <>
               <p className="text-xs text-toss-gray-400">평가금액</p>
-              <p className="text-sm font-bold text-toss-gray-900">{formatKRW(marketValue)}</p>
+              <p className="text-sm font-bold text-toss-gray-900">{formatKRW(marketValueKRW)}</p>
             </>
           )}
           <p className="text-xs text-toss-gray-400 mt-2">연간 예상 배당</p>
           <p className="text-base font-bold text-toss-blue mt-0.5">{formatKRW(annualDividend)}</p>
         </div>
       </div>
+    </div>
+  )
+}
+
+const POPULAR_TICKERS = ['005930', 'SCHD', 'JEPI', '088980', 'O']
+
+function PopularPrices({
+  prices,
+  stocks,
+  onAddClick,
+}: {
+  prices: Map<string, StockPrice>
+  stocks: DividendStock[]
+  onAddClick: () => void
+}) {
+  const items = POPULAR_TICKERS.map((ticker) => {
+    const price = getStockPrice(prices, ticker)
+    const stock = stocks.find((s) => s.ticker === ticker)
+    return price && stock ? { price, stock } : null
+  }).filter(Boolean) as { price: StockPrice; stock: DividendStock }[]
+
+  if (items.length === 0) return null
+
+  return (
+    <div>
+      <h3 className="text-sm font-bold text-toss-gray-900 mb-3">📈 인기 종목 현재가</h3>
+      <div className="space-y-2">
+        {items.map(({ price, stock }) => (
+          <div key={stock.id} className="bg-white rounded-xl p-4 flex items-center justify-between shadow-sm">
+            <div>
+              <p className="font-semibold text-toss-gray-900">{stock.name}</p>
+              <p className="text-xs text-toss-gray-400 mt-0.5">{stock.ticker}</p>
+            </div>
+            <div className="text-right">
+              <PriceLine price={price} size="sm" />
+            </div>
+          </div>
+        ))}
+      </div>
+      <button
+        onClick={onAddClick}
+        className="mt-3 w-full text-sm text-toss-blue font-semibold py-2"
+      >
+        종목 추가하러 가기 →
+      </button>
     </div>
   )
 }

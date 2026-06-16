@@ -5,7 +5,7 @@ import CalendarView from './components/CalendarView'
 import ChallengeView from './components/ChallengeView'
 import HomeScreen from './components/HomeScreen'
 import { useDividendStocks } from './hooks/useDividendStocks'
-import { useKrPrices } from './hooks/useKrPrices'
+import { useStockPrices } from './hooks/useStockPrices'
 import { usePortfolio } from './hooks/usePortfolio'
 
 type Tab = 'home' | 'calendar' | 'challenge'
@@ -15,7 +15,7 @@ export default function App() {
   const [showAddModal, setShowAddModal] = useState(false)
   const { holdings, addHolding, updateShares, removeHolding } = usePortfolio()
   const { stocks, loading, syncedAt, hasLiveKrData, hasLiveUsData } = useDividendStocks()
-  const { prices: krPrices, basDt: priceBasDt } = useKrPrices()
+  const { prices: stockPrices, krBasDt: priceBasDt, hasUsPrices } = useStockPrices()
 
   return (
     <div className="min-h-dvh bg-toss-gray-100">
@@ -27,8 +27,9 @@ export default function App() {
           syncedAt={syncedAt}
           hasLiveKrData={hasLiveKrData}
           hasLiveUsData={hasLiveUsData}
-          krPrices={krPrices}
+          stockPrices={stockPrices}
           priceBasDt={priceBasDt}
+          hasUsPrices={hasUsPrices}
           onAddClick={() => setShowAddModal(true)}
           onUpdateShares={updateShares}
           onRemove={removeHolding}
@@ -45,6 +46,7 @@ export default function App() {
           onAdd={addHolding}
           existingIds={holdings.map((h) => h.stockId)}
           stocks={stocks}
+          stockPrices={stockPrices}
         />
       )}
     </div>

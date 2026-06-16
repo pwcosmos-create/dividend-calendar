@@ -1,0 +1,537 @@
+{
+  "syncedAt": "2026-06-16T09:52:26.471Z",
+  "source": "financialmodelingprep.com/stable/profile+dividends-calendar",
+  "note": "lastDividend(연간) 기준 예측 — 참고용",
+  "stocks": [
+    {
+      "id": "schd",
+      "name": "Schwab U.S. Dividend Equity ETF",
+      "ticker": "SCHD",
+      "market": "US",
+      "currency": "USD",
+      "category": "미국 ETF",
+      "payments": [
+        {
+          "month": 3,
+          "day": 20,
+          "amountPerShare": 0.263925
+        },
+        {
+          "month": 6,
+          "day": 20,
+          "amountPerShare": 0.263925
+        },
+        {
+          "month": 9,
+          "day": 20,
+          "amountPerShare": 0.263925
+        },
+        {
+          "month": 12,
+          "day": 20,
+          "amountPerShare": 0.263925
+        }
+      ]
+    },
+    {
+      "id": "jepi",
+      "name": "JPMorgan Equity Premium Income ETF",
+      "ticker": "JEPI",
+      "market": "US",
+      "currency": "USD",
+      "category": "미국 ETF",
+      "payments": [
+        {
+          "month": 1,
+          "day": 5,
+          "amountPerShare": 0.3819725
+        },
+        {
+          "month": 2,
+          "day": 5,
+          "amountPerShare": 0.3819725
+        },
+        {
+          "month": 3,
+          "day": 5,
+          "amountPerShare": 0.3819725
+        },
+        {
+          "month": 4,
+          "day": 5,
+          "amountPerShare": 0.3819725
+        },
+        {
+          "month": 5,
+          "day": 5,
+          "amountPerShare": 0.3819725
+        },
+        {
+          "month": 6,
+          "day": 5,
+          "amountPerShare": 0.3819725
+        },
+        {
+          "month": 7,
+          "day": 5,
+          "amountPerShare": 0.3819725
+        },
+        {
+          "month": 8,
+          "day": 5,
+          "amountPerShare": 0.3819725
+        },
+        {
+          "month": 9,
+          "day": 5,
+          "amountPerShare": 0.3819725
+        },
+        {
+          "month": 10,
+          "day": 5,
+          "amountPerShare": 0.3819725
+        },
+        {
+          "month": 11,
+          "day": 5,
+          "amountPerShare": 0.3819725
+        },
+        {
+          "month": 12,
+          "day": 5,
+          "amountPerShare": 0.3819725
+        }
+      ]
+    },
+    {
+      "id": "o",
+      "name": "Realty Income Corporation",
+      "ticker": "O",
+      "market": "US",
+      "currency": "USD",
+      "category": "미국 리츠",
+      "payments": [
+        {
+          "month": 1,
+          "day": 15,
+          "amountPerShare": 0.26975
+        },
+        {
+          "month": 2,
+          "day": 15,
+          "amountPerShare": 0.26975
+        },
+        {
+          "month": 3,
+          "day": 15,
+          "amountPerShare": 0.26975
+        },
+        {
+          "month": 4,
+          "day": 15,
+          "amountPerShare": 0.26975
+        },
+        {
+          "month": 5,
+          "day": 15,
+          "amountPerShare": 0.26975
+        },
+        {
+          "month": 6,
+          "day": 15,
+          "amountPerShare": 0.26975
+        },
+        {
+          "month": 7,
+          "day": 15,
+          "amountPerShare": 0.26975
+        },
+        {
+          "month": 8,
+          "day": 15,
+          "amountPerShare": 0.26975
+        },
+        {
+          "month": 9,
+          "day": 15,
+          "amountPerShare": 0.26975
+        },
+        {
+          "month": 10,
+          "day": 15,
+          "amountPerShare": 0.26975
+        },
+        {
+          "month": 11,
+          "day": 15,
+          "amountPerShare": 0.26975
+        },
+        {
+          "month": 12,
+          "day": 15,
+          "amountPerShare": 0.26975
+        }
+      ]
+    },
+    {
+      "id": "vym",
+      "name": "Vanguard High Dividend Yield ETF",
+      "ticker": "VYM",
+      "market": "US",
+      "currency": "USD",
+      "category": "미국 ETF",
+      "payments": [
+        {
+          "month": 3,
+          "day": 25,
+          "amountPerShare": 0.878125
+        },
+        {
+          "month": 6,
+          "day": 25,
+          "amountPerShare": 0.878125
+        },
+        {
+          "month": 9,
+          "day": 25,
+          "amountPerShare": 0.878125
+        },
+        {
+          "month": 12,
+          "day": 25,
+          "amountPerShare": 0.878125
+        }
+      ]
+    },
+    {
+      "id": "main",
+      "name": "Main Street Capital Corporation",
+      "ticker": "MAIN",
+      "market": "US",
+      "currency": "USD",
+      "category": "미국 BDC",
+      "payments": [
+        {
+          "month": 1,
+          "day": 15,
+          "amountPerShare": 0.3358333333333334
+        },
+        {
+          "month": 2,
+          "day": 15,
+          "amountPerShare": 0.3358333333333334
+        },
+        {
+          "month": 3,
+          "day": 15,
+          "amountPerShare": 0.3358333333333334
+        },
+        {
+          "month": 4,
+          "day": 15,
+          "amountPerShare": 0.3358333333333334
+        },
+        {
+          "month": 5,
+          "day": 15,
+          "amountPerShare": 0.3358333333333334
+        },
+        {
+          "month": 6,
+          "day": 15,
+          "amountPerShare": 0.3358333333333334
+        },
+        {
+          "month": 7,
+          "day": 15,
+          "amountPerShare": 0.3358333333333334
+        },
+        {
+          "month": 8,
+          "day": 15,
+          "amountPerShare": 0.3358333333333334
+        },
+        {
+          "month": 9,
+          "day": 15,
+          "amountPerShare": 0.3358333333333334
+        },
+        {
+          "month": 10,
+          "day": 15,
+          "amountPerShare": 0.3358333333333334
+        },
+        {
+          "month": 11,
+          "day": 15,
+          "amountPerShare": 0.3358333333333334
+        },
+        {
+          "month": 12,
+          "day": 15,
+          "amountPerShare": 0.3358333333333334
+        }
+      ]
+    },
+    {
+      "id": "qyld",
+      "name": "Global X - Nasdaq 100 Covered Call ETF",
+      "ticker": "QYLD",
+      "market": "US",
+      "currency": "USD",
+      "category": "미국 ETF",
+      "payments": [
+        {
+          "month": 1,
+          "day": 20,
+          "amountPerShare": 0.173125
+        },
+        {
+          "month": 2,
+          "day": 20,
+          "amountPerShare": 0.173125
+        },
+        {
+          "month": 3,
+          "day": 20,
+          "amountPerShare": 0.173125
+        },
+        {
+          "month": 4,
+          "day": 20,
+          "amountPerShare": 0.173125
+        },
+        {
+          "month": 5,
+          "day": 20,
+          "amountPerShare": 0.173125
+        },
+        {
+          "month": 6,
+          "day": 20,
+          "amountPerShare": 0.173125
+        },
+        {
+          "month": 7,
+          "day": 20,
+          "amountPerShare": 0.173125
+        },
+        {
+          "month": 8,
+          "day": 20,
+          "amountPerShare": 0.173125
+        },
+        {
+          "month": 9,
+          "day": 20,
+          "amountPerShare": 0.173125
+        },
+        {
+          "month": 10,
+          "day": 20,
+          "amountPerShare": 0.173125
+        },
+        {
+          "month": 11,
+          "day": 20,
+          "amountPerShare": 0.173125
+        },
+        {
+          "month": 12,
+          "day": 20,
+          "amountPerShare": 0.173125
+        }
+      ]
+    },
+    {
+      "id": "ko",
+      "name": "The Coca-Cola Company",
+      "ticker": "KO",
+      "market": "US",
+      "currency": "USD",
+      "category": "미국 배당주",
+      "payments": [
+        {
+          "month": 4,
+          "day": 1,
+          "amountPerShare": 0.52
+        },
+        {
+          "month": 7,
+          "day": 1,
+          "amountPerShare": 0.53
+        },
+        {
+          "month": 10,
+          "day": 1,
+          "amountPerShare": 0.52
+        },
+        {
+          "month": 12,
+          "day": 1,
+          "amountPerShare": 0.52
+        }
+      ]
+    },
+    {
+      "id": "jepq",
+      "name": "JPMorgan Nasdaq Equity Premium Income ETF",
+      "ticker": "JEPQ",
+      "market": "US",
+      "currency": "USD",
+      "category": "미국 ETF",
+      "payments": [
+        {
+          "month": 1,
+          "day": 5,
+          "amountPerShare": 0.5099641666666667
+        },
+        {
+          "month": 2,
+          "day": 5,
+          "amountPerShare": 0.5099641666666667
+        },
+        {
+          "month": 3,
+          "day": 5,
+          "amountPerShare": 0.5099641666666667
+        },
+        {
+          "month": 4,
+          "day": 5,
+          "amountPerShare": 0.5099641666666667
+        },
+        {
+          "month": 5,
+          "day": 5,
+          "amountPerShare": 0.5099641666666667
+        },
+        {
+          "month": 6,
+          "day": 5,
+          "amountPerShare": 0.5099641666666667
+        },
+        {
+          "month": 7,
+          "day": 5,
+          "amountPerShare": 0.5099641666666667
+        },
+        {
+          "month": 8,
+          "day": 5,
+          "amountPerShare": 0.5099641666666667
+        },
+        {
+          "month": 9,
+          "day": 5,
+          "amountPerShare": 0.5099641666666667
+        },
+        {
+          "month": 10,
+          "day": 5,
+          "amountPerShare": 0.5099641666666667
+        },
+        {
+          "month": 11,
+          "day": 5,
+          "amountPerShare": 0.5099641666666667
+        },
+        {
+          "month": 12,
+          "day": 5,
+          "amountPerShare": 0.5099641666666667
+        }
+      ]
+    },
+    {
+      "id": "spyd",
+      "name": "State Street SPDR Portfolio S&P 500 High Dividend ETF",
+      "ticker": "SPYD",
+      "market": "US",
+      "currency": "USD",
+      "category": "미국 ETF",
+      "payments": [
+        {
+          "month": 1,
+          "day": 25,
+          "amountPerShare": 0.49703
+        },
+        {
+          "month": 4,
+          "day": 25,
+          "amountPerShare": 0.49703
+        },
+        {
+          "month": 7,
+          "day": 25,
+          "amountPerShare": 0.49703
+        },
+        {
+          "month": 10,
+          "day": 25,
+          "amountPerShare": 0.49703
+        }
+      ]
+    },
+    {
+      "id": "dgro",
+      "name": "iShares Core Dividend Growth ETF",
+      "ticker": "DGRO",
+      "market": "US",
+      "currency": "USD",
+      "category": "미국 ETF",
+      "payments": [
+        {
+          "month": 3,
+          "day": 20,
+          "amountPerShare": 0.450345
+        },
+        {
+          "month": 6,
+          "day": 20,
+          "amountPerShare": 0.450345
+        },
+        {
+          "month": 9,
+          "day": 20,
+          "amountPerShare": 0.450345
+        },
+        {
+          "month": 12,
+          "day": 20,
+          "amountPerShare": 0.450345
+        }
+      ]
+    },
+    {
+      "id": "aristocrat",
+      "name": "The Allstate Corporation",
+      "ticker": "ALL",
+      "market": "US",
+      "currency": "USD",
+      "category": "미국 배당주",
+      "payments": [
+        {
+          "month": 3,
+          "day": 1,
+          "amountPerShare": 1.04
+        },
+        {
+          "month": 6,
+          "day": 1,
+          "amountPerShare": 1.04
+        },
+        {
+          "month": 9,
+          "day": 1,
+          "amountPerShare": 1.04
+        },
+        {
+          "month": 12,
+          "day": 1,
+          "amountPerShare": 1.04
+        }
+      ]
+    }
+  ]
+}

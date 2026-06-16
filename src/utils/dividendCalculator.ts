@@ -9,6 +9,10 @@ export function formatKRW(amount: number): string {
   return new Intl.NumberFormat('ko-KR').format(Math.round(amount)) + '원'
 }
 
+export function formatUSD(amount: number): string {
+  return '$' + amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+}
+
 export function getStockById(id: string, stocks: DividendStock[] = DIVIDEND_STOCKS): DividendStock | undefined {
   return stocks.find((s) => s.id === id)
 }

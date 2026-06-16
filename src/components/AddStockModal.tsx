@@ -1,17 +1,35 @@
 import { useMemo, useState } from 'react'
+import type { StockPrice } from '../types/price'
+import { getStockPrice } from '../hooks/useStockPrices'
 import type { DividendStock } from '../types'
+import PriceLine from './PriceLine'
 
 interface AddStockModalProps {
   onClose: () => void
   onAdd: (stockId: string, shares: number) => void
   existingIds: string[]
   stocks: DividendStock[]
+  stockPrices?: Map<string, StockPrice>
 }
 
-export default function AddStockModal({ onClose, onAdd, existingIds, stocks }: AddStockModalProps) {
+function PriceTag({ prices, ticker }: { prices: Map<string, StockPrice>; ticker: string }) {
+  const price = getStockPrice(prices, ticker)
+  if (!price) return null
+  return <PriceLine price={price} size="sm" />
+}
+
+export default function AddStockModal({
+  onClose,
+  onAdd,
+  existingIds,
+  stocks,
+  stockPrices,
+}: AddStockModalProps) {
   const [search, setSearch] = useState('')
   const [selected, setSelected] = useState<DividendStock | null>(null)
   const [shares, setShares] = useState(10)
+
+  const prices = stockPrices ?? new Map<string, StockPrice>()
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim()
@@ -23,6 +41,8 @@ export default function AddStockModal({ onClose, onAdd, existingIds, stocks }: A
         s.category.includes(q),
     )
   }, [search, stocks])
+
+  const selectedPrice = selected ? getStockPrice(prices, selected.ticker) : undefined
 
   const handleAdd = () => {
     if (!selected) return
@@ -64,6 +84,12 @@ export default function AddStockModal({ onClose, onAdd, existingIds, stocks }: A
               </div>
               <p className="text-lg font-bold">{selected.name}</p>
               <p className="text-sm text-toss-gray-400 mt-1">{selected.ticker} · {selected.category}</p>
+              {selectedPrice && (
+                <div className="mt-4 inline-flex items-center gap-4 bg-white rounded-xl px-5 py-3 shadow-sm">
+                  <span className="text-xs text-toss-gray-500">현재가</span>
+                  <PriceLine price={selectedPrice} size="md" align="left" />
+                </div>
+              )}
             </div>
 
             <div className="mt-8">
@@ -135,7 +161,8 @@ export default function AddStockModal({ onClose, onAdd, existingIds, stocks }: A
                     </div>
                     <p className="text-xs text-toss-gray-400 mt-0.5">{stock.ticker} · {stock.category}</p>
                   </div>
-                  <span className="text-toss-gray-400">›</span>
+                  <PriceTag prices={prices} ticker={stock.ticker} />
+                  <span className="text-toss-gray-400 ml-1">›</span>
                 </button>
               ))}
               {filtered.length === 0 && (
