@@ -1,0 +1,55 @@
+{
+  "syncedAt": "2026-06-16T08:31:41.049Z",
+  "source": "data.go.kr/GetStockSecuritiesInfoService",
+  "basDt": "20260615",
+  "prices": [
+    {
+      "ticker": "005930",
+      "name": "삼성전자",
+      "closePrice": 337000,
+      "changeRate": 4.5,
+      "market": "KOSPI",
+      "basDt": "20260615"
+    },
+    {
+      "ticker": "017670",
+      "name": "SK텔레콤",
+      "closePrice": 105400,
+      "changeRate": 2.33,
+      "market": "KOSPI",
+      "basDt": "20260615"
+    },
+    {
+      "ticker": "105560",
+      "name": "KB금융",
+      "closePrice": 169600,
+      "changeRate": 5.21,
+      "market": "KOSPI",
+      "basDt": "20260615"
+    },
+    {
+      "ticker": "005490",
+      "name": "POSCO홀딩스",
+      "closePrice": 395000,
+      "changeRate": 4.77,
+      "market": "KOSPI",
+      "basDt": "20260615"
+    },
+    {
+      "ticker": "088980",
+      "name": "맥쿼리인프라",
+      "closePrice": 10950,
+      "changeRate": -1.08,
+      "market": "KOSPI",
+      "basDt": "20260615"
+    },
+    {
+      "ticker": "329180",
+      "name": "HD현대중공업",
+      "closePrice": 714000,
+      "changeRate": 9.85,
+      "market": "KOSPI",
+      "basDt": "20260615"
+    }
+  ]
+}

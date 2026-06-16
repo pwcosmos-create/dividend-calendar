@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { CHALLENGE_GOALS } from '../data/dividendStocks'
-import type { Holding } from '../types'
+import type { DividendStock, Holding } from '../types'
 import {
   calculateMonthlyDividends,
   formatKRW,
@@ -10,10 +10,11 @@ import {
 
 interface ChallengeViewProps {
   holdings: Holding[]
+  stocks: DividendStock[]
 }
 
-export default function ChallengeView({ holdings }: ChallengeViewProps) {
-  const monthly = useMemo(() => calculateMonthlyDividends(holdings), [holdings])
+export default function ChallengeView({ holdings, stocks }: ChallengeViewProps) {
+  const monthly = useMemo(() => calculateMonthlyDividends(holdings, stocks), [holdings, stocks])
   const monthlyAmount = getCurrentMonthDividend(monthly)
   const annualAmount = getAnnualTotal(monthly)
 

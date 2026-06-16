@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
-import type { Holding } from '../types'
+import type { DividendStock, Holding } from '../types'
+import type { KrPrice } from '../hooks/useKrPrices'
 import {
   calculateMonthlyDividends,
   formatKRW,
@@ -11,6 +12,13 @@ import {
 
 interface HomeScreenProps {
   holdings: Holding[]
+  stocks: DividendStock[]
+  loading?: boolean
+  syncedAt?: string | null
+  hasLiveKrData?: boolean
+  hasLiveUsData?: boolean
+  krPrices?: Map<string, KrPrice>
+  priceBasDt?: string | null
   onAddClick: () => void
   onUpdateShares: (stockId: string, shares: number) => void
   onRemove: (stockId: string) => void
@@ -18,11 +26,18 @@ interface HomeScreenProps {
 
 export default function HomeScreen({
   holdings,
+  stocks,
+  loading,
+  syncedAt,
+  hasLiveKrData,
+  hasLiveUsData,
+  krPrices,
+  priceBasDt,
   onAddClick,
   onUpdateShares,
   onRemove,
 }: HomeScreenProps) {
-  const monthly = useMemo(() => calculateMonthlyDividends(holdings), [holdings])
+  const monthly = useMemo(() => calculateMonthlyDividends(holdings, stocks), [holdings, stocks])
   const annualTotal = getAnnualTotal(monthly)
   const thisMonth = getCurrentMonthDividend(monthly)
   const nextPayment = getNextPayment(monthly)
@@ -34,6 +49,24 @@ export default function HomeScreen({
       <header className="px-5 pt-12 pb-6">
         <p className="text-toss-gray-600 text-sm font-medium">나의 월급 외 수당</p>
         <h1 className="text-2xl font-bold text-toss-gray-900 mt-1">배당금 달력</h1>
+        {hasLiveKrData && syncedAt && (
+          <p className="text-[11px] text-toss-gray-400 mt-2">
+            🇰🇷 국내 배당 · 공공데이터 ({new Date(syncedAt).toLocaleDateString('ko-KR')})
+          </p>
+        )}
+        {hasLiveUsData && (
+          <p className="text-[11px] text-toss-gray-400 mt-1">
+            🇺🇸 미국 배당 · FMP 실데이터 연동
+          </p>
+        )}
+        {priceBasDt && krPrices && krPrices.size > 0 && (
+          <p className="text-[11px] text-toss-gray-400 mt-1">
+            📈 시세 · {priceBasDt.replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3')} 종가 기준
+          </p>
+        )}
+        {loading && (
+          <p className="text-[11px] text-toss-gray-400 mt-2">배당 데이터 불러오는 중...</p>
+        )}
       </header>
 
       {/* Hero Card */}
@@ -87,10 +120,12 @@ export default function HomeScreen({
         ) : (
           <div className="space-y-3">
             {holdings.map((h) => {
-              const stock = getStockById(h.stockId)
+              const stock = getStockById(h.stockId, stocks)
               if (!stock) return null
-              const stockAnnual = calculateMonthlyDividends([h])
+              const stockAnnual = calculateMonthlyDividends([h], stocks)
               const stockTotal = getAnnualTotal(stockAnnual)
+
+              const price = stock.market === 'KR' ? krPrices?.get(stock.ticker) : undefined
 
               return (
                 <HoldingCard
@@ -101,6 +136,7 @@ export default function HomeScreen({
                   category={stock.category}
                   shares={h.shares}
                   annualDividend={stockTotal}
+                  price={price}
                   onUpdateShares={(shares) => onUpdateShares(h.stockId, shares)}
                   onRemove={() => onRemove(h.stockId)}
                 />
@@ -120,6 +156,7 @@ function HoldingCard({
   category,
   shares,
   annualDividend,
+  price,
   onUpdateShares,
   onRemove,
 }: {
@@ -129,9 +166,12 @@ function HoldingCard({
   category: string
   shares: number
   annualDividend: number
+  price?: KrPrice
   onUpdateShares: (shares: number) => void
   onRemove: () => void
 }) {
+  const marketValue = price ? price.closePrice * shares : null
+
   return (
     <div className="bg-white rounded-2xl p-4 shadow-sm">
       <div className="flex items-start justify-between">
@@ -144,6 +184,14 @@ function HoldingCard({
           <div>
             <p className="font-bold text-toss-gray-900">{name}</p>
             <p className="text-xs text-toss-gray-400 mt-0.5">{ticker} · {category}</p>
+            {price && (
+              <p className="text-xs mt-1">
+                <span className="font-semibold text-toss-gray-700">{formatKRW(price.closePrice)}</span>
+                <span className={`ml-1.5 ${price.changeRate >= 0 ? 'text-red-500' : 'text-toss-blue'}`}>
+                  {price.changeRate >= 0 ? '+' : ''}{price.changeRate}%
+                </span>
+              </p>
+            )}
           </div>
         </div>
         <button onClick={onRemove} className="text-toss-gray-400 text-xs px-2 py-1">삭제</button>
@@ -169,8 +217,14 @@ function HoldingCard({
           </div>
         </div>
         <div className="text-right">
-          <p className="text-xs text-toss-gray-400">연간 예상 배당</p>
-          <p className="text-base font-bold text-toss-blue mt-1">{formatKRW(annualDividend)}</p>
+          {marketValue !== null && (
+            <>
+              <p className="text-xs text-toss-gray-400">평가금액</p>
+              <p className="text-sm font-bold text-toss-gray-900">{formatKRW(marketValue)}</p>
+            </>
+          )}
+          <p className="text-xs text-toss-gray-400 mt-2">연간 예상 배당</p>
+          <p className="text-base font-bold text-toss-blue mt-0.5">{formatKRW(annualDividend)}</p>
         </div>
       </div>
     </div>

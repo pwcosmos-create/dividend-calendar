@@ -9,7 +9,11 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "build:pages": "tsc -b && vite build --base /dividend-calendar/",
-    "deploy": "npm run build:pages && gh-pages -d dist"
+    "deploy": "npm run build:pages && gh-pages -d dist",
+    "sync:kr": "node scripts/sync-kr-dividends.mjs",
+    "sync:prices": "node scripts/sync-kr-prices.mjs",
+    "sync:us": "node scripts/sync-us-dividends.mjs",
+    "sync:all": "npm run sync:kr && npm run sync:prices && npm run sync:us"
   },
   "dependencies": {
     "react": "^19.2.6",

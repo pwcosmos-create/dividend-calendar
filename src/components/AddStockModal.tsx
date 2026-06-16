@@ -1,28 +1,28 @@
 import { useMemo, useState } from 'react'
-import { DIVIDEND_STOCKS } from '../data/dividendStocks'
 import type { DividendStock } from '../types'
 
 interface AddStockModalProps {
   onClose: () => void
   onAdd: (stockId: string, shares: number) => void
   existingIds: string[]
+  stocks: DividendStock[]
 }
 
-export default function AddStockModal({ onClose, onAdd, existingIds }: AddStockModalProps) {
+export default function AddStockModal({ onClose, onAdd, existingIds, stocks }: AddStockModalProps) {
   const [search, setSearch] = useState('')
   const [selected, setSelected] = useState<DividendStock | null>(null)
   const [shares, setShares] = useState(10)
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim()
-    if (!q) return DIVIDEND_STOCKS
-    return DIVIDEND_STOCKS.filter(
+    if (!q) return stocks
+    return stocks.filter(
       (s) =>
         s.name.toLowerCase().includes(q) ||
         s.ticker.toLowerCase().includes(q) ||
         s.category.includes(q),
     )
-  }, [search])
+  }, [search, stocks])
 
   const handleAdd = () => {
     if (!selected) return

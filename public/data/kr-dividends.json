@@ -1,0 +1,161 @@
+{
+  "syncedAt": "2026-06-16T08:31:12.521Z",
+  "source": "data.go.kr/GetStocDiviInfoService_V2",
+  "stocks": [
+    {
+      "id": "samsung-elec",
+      "name": "삼성전자",
+      "ticker": "005930",
+      "market": "KR",
+      "currency": "KRW",
+      "category": "국내 배당주",
+      "payments": [
+        {
+          "month": 4,
+          "day": 18,
+          "amountPerShare": 363
+        },
+        {
+          "month": 5,
+          "day": 20,
+          "amountPerShare": 365
+        },
+        {
+          "month": 8,
+          "day": 20,
+          "amountPerShare": 367
+        },
+        {
+          "month": 11,
+          "day": 19,
+          "amountPerShare": 370
+        }
+      ]
+    },
+    {
+      "id": "sk-telecom",
+      "name": "SK텔레콤",
+      "ticker": "017670",
+      "market": "KR",
+      "currency": "KRW",
+      "category": "국내 배당주",
+      "payments": [
+        {
+          "month": 4,
+          "day": 25,
+          "amountPerShare": 1050
+        },
+        {
+          "month": 6,
+          "day": 19,
+          "amountPerShare": 830
+        },
+        {
+          "month": 9,
+          "day": 17,
+          "amountPerShare": 830
+        }
+      ]
+    },
+    {
+      "id": "kb-financial",
+      "name": "KB금융지주",
+      "ticker": "105560",
+      "market": "KR",
+      "currency": "KRW",
+      "category": "국내 배당주",
+      "payments": [
+        {
+          "month": 4,
+          "day": 15,
+          "amountPerShare": 804
+        },
+        {
+          "month": 5,
+          "day": 22,
+          "amountPerShare": 912
+        },
+        {
+          "month": 8,
+          "day": 22,
+          "amountPerShare": 920
+        },
+        {
+          "month": 11,
+          "day": 27,
+          "amountPerShare": 930
+        }
+      ]
+    },
+    {
+      "id": "posco",
+      "name": "포스코홀딩스",
+      "ticker": "005490",
+      "market": "KR",
+      "currency": "KRW",
+      "category": "국내 배당주",
+      "payments": [
+        {
+          "month": 4,
+          "day": 18,
+          "amountPerShare": 2500
+        },
+        {
+          "month": 6,
+          "day": 13,
+          "amountPerShare": 2500
+        },
+        {
+          "month": 9,
+          "day": 12,
+          "amountPerShare": 2500
+        },
+        {
+          "month": 12,
+          "day": 11,
+          "amountPerShare": 2500
+        }
+      ]
+    },
+    {
+      "id": "macquarie",
+      "name": "맥쿼리한국인프라투융자회사",
+      "ticker": "088980",
+      "market": "KR",
+      "currency": "KRW",
+      "category": "국내 인프라",
+      "payments": [
+        {
+          "month": 2,
+          "day": 28,
+          "amountPerShare": 380
+        },
+        {
+          "month": 8,
+          "day": 29,
+          "amountPerShare": 380
+        }
+      ]
+    },
+    {
+      "id": "hd-hyundai",
+      "name": "에이치디현대중공업",
+      "ticker": "329180",
+      "market": "KR",
+      "currency": "KRW",
+      "category": "국내 배당주",
+      "payments": [
+        {
+          "month": 4,
+          "day": 4,
+          "amountPerShare": 2090
+        },
+        {
+          "month": 8,
+          "day": 8,
+          "amountPerShare": 1671
+        }
+      ]
+    }
+  ]
+}

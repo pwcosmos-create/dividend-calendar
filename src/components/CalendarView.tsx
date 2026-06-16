@@ -1,15 +1,16 @@
 import { useMemo, useState } from 'react'
-import type { Holding } from '../types'
+import type { DividendStock, Holding } from '../types'
 import { calculateMonthlyDividends, formatKRW } from '../utils/dividendCalculator'
 
 interface CalendarViewProps {
   holdings: Holding[]
+  stocks: DividendStock[]
 }
 
 const MONTH_NAMES = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
 
-export default function CalendarView({ holdings }: CalendarViewProps) {
-  const monthly = useMemo(() => calculateMonthlyDividends(holdings), [holdings])
+export default function CalendarView({ holdings, stocks }: CalendarViewProps) {
+  const monthly = useMemo(() => calculateMonthlyDividends(holdings, stocks), [holdings, stocks])
   const maxAmount = Math.max(...monthly.map((m) => m.totalKRW), 1)
   const currentMonth = new Date().getMonth() + 1
   const [selectedMonth, setSelectedMonth] = useState<number | null>(currentMonth)

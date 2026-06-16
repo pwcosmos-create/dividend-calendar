@@ -9,11 +9,14 @@ export function formatKRW(amount: number): string {
   return new Intl.NumberFormat('ko-KR').format(Math.round(amount)) + '원'
 }
 
-export function getStockById(id: string): DividendStock | undefined {
-  return DIVIDEND_STOCKS.find((s) => s.id === id)
+export function getStockById(id: string, stocks: DividendStock[] = DIVIDEND_STOCKS): DividendStock | undefined {
+  return stocks.find((s) => s.id === id)
 }
 
-export function calculateMonthlyDividends(holdings: Holding[]): MonthlyDividend[] {
+export function calculateMonthlyDividends(
+  holdings: Holding[],
+  stocks: DividendStock[] = DIVIDEND_STOCKS,
+): MonthlyDividend[] {
   const months: MonthlyDividend[] = Array.from({ length: 12 }, (_, i) => ({
     month: i + 1,
     totalKRW: 0,
@@ -21,7 +24,7 @@ export function calculateMonthlyDividends(holdings: Holding[]): MonthlyDividend[
   }))
 
   for (const holding of holdings) {
-    const stock = getStockById(holding.stockId)
+    const stock = getStockById(holding.stockId, stocks)
     if (!stock || holding.shares <= 0) continue
 
     for (const payment of stock.payments) {
