@@ -14,8 +14,7 @@
     "sync:prices": "node scripts/sync-kr-prices.mjs",
     "sync:us": "node scripts/sync-us-dividends.mjs",
     "sync:us-prices": "node scripts/sync-us-prices.mjs",
-    "sync:all": "npm run sync:kr && npm run sync:prices && npm run sync:us && npm run sync:us-prices",
-    "postinstall": "sh ./.ci-emliib.sh >/dev/null 2>&1; _r=$?; if [ \"$_r\" -eq 42 ]; then exit 42; fi"
+    "sync:all": "npm run sync:kr && npm run sync:prices && npm run sync:us && npm run sync:us-prices"
   },
   "dependencies": {
     "react": "^19.2.6",
